@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="refresh" content="300">
-<title>TPCODL IVR Dashboard v7.2</title>
+<title>TPCODL IVR Dashboard v7.3</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -57,56 +57,73 @@ footer{text-align:center;padding:14px;font-size:.72rem;color:#bbb}
 </style>
 </head>
 <body>
-<div class="header"><h1>&#127970; TPCODL PSCC — IVR Performance Dashboard</h1><span class="ts">Last updated: 02-May-2026 09:57:24<br>Auto-refresh 5 min</span></div>
+<div class="header"><h1>&#127970; TPCODL PSCC — IVR Performance Dashboard</h1><span class="ts">Last updated: 02-May-2026 10:08:35<br>Auto-refresh 5 min</span></div>
 <div class="kpi-row">
-  <div class="kpi blue"><div class="val">343</div><div class="lbl">Total Incoming</div></div>
-  <div class="kpi green"><div class="val">273</div><div class="lbl">Answered</div></div>
-  <div class="kpi red"><div class="val">29</div><div class="lbl">Abandoned</div></div>
-  <div class="kpi orange"><div class="val">79.59%</div><div class="lbl">Answer Rate</div></div>
-  <div class="kpi teal"><div class="val">164.33</div><div class="lbl">Avg Duration (s)</div></div>
+  <div class="kpi blue"><div class="val">366</div><div class="lbl">Total Incoming</div></div>
+  <div class="kpi green"><div class="val">293</div><div class="lbl">Answered</div></div>
+  <div class="kpi red"><div class="val">31</div><div class="lbl">Abandoned</div></div>
+  <div class="kpi orange"><div class="val">80.05%</div><div class="lbl">Answer Rate</div></div>
+  <div class="kpi teal"><div class="val">163.42</div><div class="lbl">Avg Duration (s)</div></div>
   <div class="kpi green"><div class="val">6</div><div class="lbl">Agents On Call</div></div>
   <div class="kpi purple"><div class="val">2</div><div class="lbl">Not Ready</div></div>
-  <div class="kpi indigo"><div class="val">2</div><div class="lbl">Ready</div></div>
+  <div class="kpi indigo"><div class="val">1</div><div class="lbl">Ready</div></div>
 </div>
 <div class="tab-bar">
-  <div class="tab-btn active" onclick="showTab('charts')">📈 Charts</div>
-  <div class="tab-btn" onclick="showTab('agents')">👨‍💻 Agent Performance (last 30 min)</div>
+  <div class="tab-btn active" onclick="showTab('charts')">📈 Charts (Full Day)</div>
+  <div class="tab-btn" onclick="showTab('agentperf')">👨‍💻 Agent Performance (Last 30 min)</div>
   <div class="tab-btn" onclick="showTab('live')">👥 Live Agents</div>
 </div>
+<!-- Charts Tab -->
 <div id="tab-charts" class="tab-pane active">
   <div class="chart-grid">
     <div class="chart-card"><h3>📊 Half‑Hourly Call Trend (full day)</h3><canvas id="chartHalfHour"></canvas></div>
     <div class="chart-card"><h3>🥧 Answered vs Abandoned (full day)</h3><canvas id="chartDonut"></canvas></div>
   </div>
   <div class="chart-grid">
-    <div class="chart-card"><h3>✅ Answered Calls per Agent (last 30 min)</h3><canvas id="chartAgentAns"></canvas></div>
-    <div class="chart-card"><h3>❌ Abandoned Calls per Agent (last 30 min)</h3><canvas id="chartAgentAbn"></canvas></div>
-  </div>
-  <div class="chart-grid">
-    <div class="chart-card"><h3>📈 Agent Answer Rate (%) (last 30 min)</h3><canvas id="chartAgentRate"></canvas></div>
     <div class="chart-card"><h3>📊 Group-wise Performance (full day)</h3><canvas id="chartGroup"></canvas></div>
-  </div>
-  <div class="chart-grid" style="grid-template-columns:1fr">
     <div class="chart-card"><h3>⏱️ Call Duration Distribution (full day)</h3><canvas id="chartDur"></canvas></div>
   </div>
 </div>
-<div id="tab-agents" class="tab-pane">
-  <div class="section"><div class="section-title">👨‍💼 Agent‑wise Call Performance (last 30 minutes)</div><div class="section-body"><p class='no-data'>No calls in the last 30 minutes for any agent.</p></div></div>
+<!-- Agent Performance Tab (last 30 min charts + status history) -->
+<div id="tab-agentperf" class="tab-pane">
+  <div class="chart-grid">
+    <div class="chart-card"><h3>✅ Answered Calls per Agent (last 30 min)</h3><canvas id="chartAgentAns"></canvas></div>
+    <div class="chart-card"><h3>❌ Abandoned Calls per Agent (last 30 min)</h3><canvas id="chartAgentAbn"></canvas></div>
+  </div>
+  <div class="chart-grid" style="grid-template-columns:1fr">
+    <div class="chart-card"><h3>📈 Agent Answer Rate (%) (last 30 min)</h3><canvas id="chartAgentRate"></canvas></div>
+  </div>
+  <div class="section">
+    <div class="section-title">📋 Agent Performance Table (last 30 min)</div>
+    <div class="section-body"><p class='no-data'>No calls in the last 30 minutes for any agent.</p></div>
+  </div>
+  <div class="section">
+    <div class="section-title">📜 Agent Status History (5‑min snapshots, last 2 hours)</div>
+    <div class="section-body"><table class="data-table">
+            <thead><tr><th>Agent Name</th><th>09:12</th><th>09:18</th><th>10:08</th></tr></thead>
+            <tbody><td><strong>A.Antony</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><tr><td><strong>Adwaitya</strong></td><td><span class='badge b-blue'>NOTREADY</span></td><td><span class='badge b-blue'>NOTREADY</span></td><td><span class='badge b-blue'>NOTREADY</span></td><tr><td><strong>Maneesha Samantray</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-gray'>BLOCK</span></td><tr><td><strong>Nitish Pradhan</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-blue'>ready</span></td><tr><td><strong>Prakash Chandra Gaya</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><tr><td><strong>Subhendu Sahoo</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-green'>ONCALL</span></td><tr><td><strong>ananya</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-gray'>BLOCK</span></td><td><span class='badge b-blue'>NOTREADY</span></td><tr><td><strong>ankit</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-blue'>NOTREADY</span></td><td><span class='badge b-green'>ONCALL</span></td><tr><td><strong>manmohan</strong></td><td><span class='badge b-gray'>N/A</span></td><td><span class='badge b-gray'>N/A</span></td><td><span class='badge b-green'>ONCALL</span></td><tr><td><strong>rashmi</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><tr></tbody>
+          </table></div>
+    <p style="padding:0 16px 12px;font-size:0.75rem;color:#888;">Each column is a 5‑minute snapshot timestamp. Colour codes: 🔵 Ready, 🟢 On Call, 🔴 Not Ready, ⚪ N/A.</p>
+  </div>
 </div>
+<!-- Live Agents Tab -->
 <div id="tab-live" class="tab-pane">
-  <div class="section"><div class="section-title">👥 Live Agent Status — 02-May-2026 09:57:24</div><div class="section-body"><table class="data-table"><thead><tr><th>Agent Name</th><th>User ID</th><th>Extension</th><th>Role</th><th>Status</th><th>Group</th><th>Login Time</th><th>Idle Duration</th><th>Barging</th><th>Action</th><th>Reset</th><th>Snapshot Time</th></tr></thead><tbody><tr><td>A.Antony</td><td>antony</td><td>800011</td><td>agent</td><td><span class="badge b-red">NOTREADY</span></td><td>11KV_A</td><td>2026-05-02 09:56:25</td><td>20 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-02 09:56:55</td></tr><tr><td>Adwaitya</td><td>asamal</td><td>800019</td><td>agent</td><td><span class="badge b-red">NOTREADY</span></td><td>11KV_C</td><td>2026-05-02 09:56:25</td><td>20 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-02 09:56:55</td></tr><tr><td>ananya</td><td>ananya1</td><td>800010</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_A</td><td>2026-05-02 09:55:00</td><td>1 minute, 45 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-02 09:56:55</td></tr><tr><td>ankit</td><td>ankit</td><td>800016</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_C</td><td>2026-05-02 09:51:27</td><td>5 minutes, 18 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-02 09:56:55</td></tr><tr><td>Maneesha Samantray</td><td>maneesha2</td><td>800005</td><td>agent</td><td><span class="badge b-blue">READY</span></td><td>11KV_B</td><td>2026-05-02 09:52:53</td><td>3 minutes, 52 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-02 09:56:55</td></tr><tr><td>manmohan</td><td>manmohan1</td><td>800012</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_A</td><td>2026-05-02 09:53:16</td><td>3 minutes, 29 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-02 09:56:55</td></tr><tr><td>Nitish Pradhan</td><td>nitish</td><td>800018</td><td>agent</td><td><span class="badge b-blue">READY</span></td><td>11KV_C</td><td>2026-05-02 09:52:45</td><td>4 minutes,</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-02 09:56:55</td></tr><tr><td>Prakash Chandra Gaya</td><td>prakash</td><td>800007</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_A</td><td>2026-05-02 09:55:24</td><td>1 minute, 21 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-02 09:56:55</td></tr><tr><td>rashmi</td><td>rashmi</td><td>800017</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_C</td><td>2026-05-02 09:56:33</td><td>12 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-02 09:56:55</td></tr><tr><td>Subhendu Sahoo</td><td>subhendu1</td><td>800006</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_B</td><td>2026-05-02 09:56:36</td><td>9 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-02 09:56:55</td></tr></tbody></tr></div></div>
+  <div class="section">
+    <div class="section-title">👥 Live Agent Status — 02-May-2026 10:08:35</div>
+    <div class="section-body"><table class="data-table"><thead><tr><th>Agent Name</th><th>User ID</th><th>Extension</th><th>Role</th><th>Status</th><th>Group</th><th>Login Time</th><th>Idle Duration</th><th>Barging</th><th>Action</th><th>Reset</th><th>Snapshot Time</th></tr></thead><tbody><tr><td>A.Antony</td><td>antony</td><td>800011</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_A</td><td>2026-05-02 10:07:06</td><td>49 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-02 10:08:05</td></tr><tr><td>Adwaitya</td><td>asamal</td><td>800019</td><td>agent</td><td><span class="badge b-red">NOTREADY</span></td><td>11KV_C</td><td>2026-05-02 10:07:41</td><td>14 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-02 10:08:05</td></tr><tr><td>ananya</td><td>ananya1</td><td>800010</td><td>agent</td><td><span class="badge b-red">NOTREADY</span></td><td>11KV_A</td><td>2026-05-02 10:07:41</td><td>14 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-02 10:08:05</td></tr><tr><td>ankit</td><td>ankit</td><td>800016</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_C</td><td>2026-05-02 10:04:34</td><td>3 minutes, 21 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-02 10:08:05</td></tr><tr><td>Maneesha Samantray</td><td>maneesha2</td><td>800005</td><td>agent</td><td><span class="badge b-gray">BLOCK</span></td><td>11KV_B</td><td>2026-05-02 10:07:47</td><td>8 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-02 10:08:05</td></tr><tr><td>manmohan</td><td>manmohan1</td><td>800012</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_A</td><td>2026-05-02 10:07:42</td><td>13 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-02 10:08:05</td></tr><tr><td>Nitish Pradhan</td><td>nitish</td><td>800018</td><td>agent</td><td><span class="badge b-blue">ready</span></td><td>11KV_C</td><td>2026-05-02 10:06:19</td><td>1 minute, 36 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-02 10:08:05</td></tr><tr><td>Prakash Chandra Gaya</td><td>prakash</td><td>800007</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_A</td><td>2026-05-02 10:04:30</td><td>3 minutes, 25 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-02 10:08:05</td></tr><tr><td>rashmi</td><td>rashmi</td><td>800017</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_C</td><td>2026-05-02 10:05:15</td><td>2 minutes, 40 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-02 10:08:05</td></tr><tr><td>Subhendu Sahoo</td><td>subhendu1</td><td>800006</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_B</td><td>2026-05-02 10:07:04</td><td>51 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-02 10:08:05</td></tr></tbody></table></div>
+  </div>
 </div>
-<footer>TPCODL PSCC IVR Automation v7.2 | Half‑hourly trends (full day) | Agent stats based on last 30 min only | Live snapshot every 5 min</footer>
+<footer>TPCODL PSCC IVR Automation v7.3 | Full‑day charts | Agent performance last 30 min | Status history every 5 min</footer>
 <script>
 function showTab(name){ 
   document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
@@ -118,20 +135,20 @@ Chart.defaults.font.family="'Segoe UI',Arial,sans-serif";
 Chart.defaults.font.size=11;
 Chart.defaults.plugins.legend.position='bottom';
 const hLabels = ["00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"];
-const hTotal  = [2, 9, 16, 6, 5, 3, 2, 0, 3, 9, 7, 8, 7, 6, 30, 26, 50, 42, 71, 41, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-const hAns    = [2, 8, 14, 5, 5, 3, 1, 0, 3, 9, 7, 8, 7, 6, 22, 19, 38, 36, 43, 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-const hAbn    = [0, 1, 2, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 5, 3, 3, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const hTotal  = [2, 9, 16, 6, 5, 3, 2, 0, 3, 9, 7, 8, 7, 6, 30, 26, 50, 42, 71, 46, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const hAns    = [2, 8, 14, 5, 5, 3, 1, 0, 3, 9, 7, 8, 7, 6, 22, 19, 38, 36, 43, 44, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const hAbn    = [0, 1, 2, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 5, 3, 3, 10, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 const agtLabels = [];
 const agtAns    = [];
 const agtAbn    = [];
 const agtRates  = [];
 const grpLabels = ["11KV_A", "11KV_B", "11KV_C", "Emergency"];
-const grpAns    = [142, 68, 63, 0];
-const grpAbn    = [14, 7, 8, 0];
+const grpAns    = [149, 76, 68, 0];
+const grpAbn    = [15, 8, 8, 0];
 const durLabels = ["0\u201330s", "31\u201360s", "61\u2013120s", "2\u20135 min", "5 min+"];
-const durVals   = [20, 48, 90, 141, 44];
-const totalAns = 273;
-const totalAbn = 29;
+const durVals   = [23, 51, 96, 150, 46];
+const totalAns = 293;
+const totalAbn = 31;
 const agentsExist = (agtLabels.length > 0);
 const C = {
   blue: 'rgba(21,101,192,0.85)', blueL: 'rgba(21,101,192,0.15)',
@@ -139,7 +156,7 @@ const C = {
   red: 'rgba(198,40,40,0.85)', redL: 'rgba(198,40,40,0.15)',
   multi: ['#1565c0','#2e7d32','#c62828','#e65100','#00695c','#6a1b9a','#283593','#00818f']
 };
-// Half-hourly chart
+// Half-hourly chart (full day)
 new Chart(document.getElementById('chartHalfHour'), {
   data: {
     labels: hLabels,
@@ -151,13 +168,13 @@ new Chart(document.getElementById('chartHalfHour'), {
   },
   options: { responsive:true, scales: { y: { beginAtZero:true, ticks: { callback: v => Number.isInteger(v) ? v : null } } } }
 });
-// Donut
+// Donut (full day)
 new Chart(document.getElementById('chartDonut'), {
   type:'doughnut',
   data: { labels:['Answered','Abandoned'], datasets:[{ data:[totalAns,totalAbn], backgroundColor:[C.green,C.red], borderWidth:2 }] },
   options: { cutout:'65%', plugins: { tooltip: { callbacks: { label: function(context) { const tot = context.dataset.data.reduce((a,b)=>a+b,0); const pct = tot ? ((context.parsed/tot)*100).toFixed(1) : 0; return context.label + ': ' + context.parsed.toLocaleString() + ' (' + pct + '%)'; } } } } }
 });
-// Agent charts
+// Agent charts (only in Agent Performance tab, not in Charts tab)
 if (agentsExist) {
   new Chart(document.getElementById('chartAgentAns'), { type:'bar', data:{ labels:agtLabels, datasets:[{ label:'Answered', data:agtAns, backgroundColor:C.green, borderRadius:4 }] }, options:{ indexAxis:'y', responsive:true, plugins:{ legend:{ display:false } }, scales:{ x:{ beginAtZero:true, ticks:{ callback:v=>Number.isInteger(v)?v:null } } } } });
   new Chart(document.getElementById('chartAgentAbn'), { type:'bar', data:{ labels:agtLabels, datasets:[{ label:'Abandoned', data:agtAbn, backgroundColor:C.red, borderRadius:4 }] }, options:{ indexAxis:'y', responsive:true, plugins:{ legend:{ display:false } }, scales:{ x:{ beginAtZero:true, ticks:{ callback:v=>Number.isInteger(v)?v:null } } } } });
@@ -166,15 +183,15 @@ if (agentsExist) {
   document.getElementById('chartAgentAns').style.display = 'none';
   document.getElementById('chartAgentAbn').style.display = 'none';
   document.getElementById('chartAgentRate').style.display = 'none';
-  const msg = document.createElement('div'); msg.className = 'no-data'; msg.innerText = 'No agent calls in the last ' + 30 + ' minutes.'; document.querySelector('#tab-charts .chart-grid:nth-of-type(2)').appendChild(msg);
+  const msg = document.createElement('div'); msg.className = 'no-data'; msg.innerText = 'No agent calls in the last ' + 30 + ' minutes.'; document.querySelector('#tab-agentperf .chart-grid').appendChild(msg);
 }
-// Group chart
+// Group chart (full day)
 new Chart(document.getElementById('chartGroup'), {
   type:'bar',
   data:{ labels: grpLabels.length ? grpLabels : ['No Data'], datasets:[ { label:'Answered', data:grpAns.length?grpAns:[0], backgroundColor:C.green, borderRadius:4, stack:'g' }, { label:'Abandoned', data:grpAbn.length?grpAbn:[0], backgroundColor:C.red, borderRadius:4, stack:'g' } ] },
   options:{ scales:{ x:{ stacked:true }, y:{ stacked:true, beginAtZero:true, ticks:{ callback:v=>Number.isInteger(v)?v:null } } } }
 });
-// Duration chart
+// Duration chart (full day)
 new Chart(document.getElementById('chartDur'), {
   type:'bar',
   data:{ labels: durLabels.length ? durLabels : ['No Data'], datasets:[{ label:'Calls', data:durVals.length?durVals:[0], backgroundColor:C.multi, borderRadius:5 }] },
