@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="refresh" content="300">
-<title>TPCODL IVR Dashboard v9.1</title>
+<title>TPCODL IVR Dashboard v9.2</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -69,17 +69,29 @@ footer{text-align:center;padding:14px;font-size:.72rem;color:#bbb}
 <body>
 <div class="header">
   <h1>&#127970; TPCODL PSCC — IVR Performance Dashboard</h1>
-  <span class="ts">Last updated: 03-May-2026 11:47:57<br>Auto-refresh 5 min</span>
+  <span class="ts">Last updated: 03-May-2026 12:03:57<br>Auto-refresh 5 min</span>
 </div>
-<!-- KPI Row: first 5 = current shift stats, last 3 = group availability -->
+<!-- KPI Row: first 15 cards = group-wise KPIs for current shift (5 per group), last 3 = group availability -->
 <div class="kpi-row">
   
-    <div class="kpi blue"><div class="val">739</div><div class="lbl">Shift A<br>Total Incoming</div></div>
-    <div class="kpi green"><div class="val">648</div><div class="lbl">Shift A<br>Answered</div></div>
-    <div class="kpi red"><div class="val">91</div><div class="lbl">Shift A<br>Abandoned</div></div>
-    <div class="kpi orange"><div class="val">87.7%</div><div class="lbl">Shift A<br>Answer Rate</div></div>
-    <div class="kpi teal"><div class="val">138.78</div><div class="lbl">Shift A<br>Avg Duration (s)</div></div>
-    
+        <div class="kpi blue"><div class="val">114</div><div class="lbl">11KV_A<br>Total</div></div>
+        <div class="kpi green"><div class="val">98</div><div class="lbl">11KV_A<br>Answered</div></div>
+        <div class="kpi red"><div class="val">16</div><div class="lbl">11KV_A<br>Abandoned</div></div>
+        <div class="kpi orange"><div class="val">86.0%</div><div class="lbl">11KV_A<br>Answer Rate</div></div>
+        <div class="kpi teal"><div class="val">190.8</div><div class="lbl">11KV_A<br>Avg Dur (s)</div></div>
+        
+        <div class="kpi blue"><div class="val">356</div><div class="lbl">11KV_B<br>Total</div></div>
+        <div class="kpi green"><div class="val">300</div><div class="lbl">11KV_B<br>Answered</div></div>
+        <div class="kpi red"><div class="val">56</div><div class="lbl">11KV_B<br>Abandoned</div></div>
+        <div class="kpi orange"><div class="val">84.3%</div><div class="lbl">11KV_B<br>Answer Rate</div></div>
+        <div class="kpi teal"><div class="val">126.58</div><div class="lbl">11KV_B<br>Avg Dur (s)</div></div>
+        
+        <div class="kpi blue"><div class="val">288</div><div class="lbl">11KV_C<br>Total</div></div>
+        <div class="kpi green"><div class="val">262</div><div class="lbl">11KV_C<br>Answered</div></div>
+        <div class="kpi red"><div class="val">26</div><div class="lbl">11KV_C<br>Abandoned</div></div>
+        <div class="kpi orange"><div class="val">91.0%</div><div class="lbl">11KV_C<br>Answer Rate</div></div>
+        <div class="kpi teal"><div class="val">139.99</div><div class="lbl">11KV_C<br>Avg Dur (s)</div></div>
+        
   
         <div class="kpi green ">
           <div class="val">4/4</div>
@@ -90,7 +102,7 @@ footer{text-align:center;padding:14px;font-size:.72rem;color:#bbb}
           <div class="lbl">✅ 11KV_B</div>
         </div>
         <div class="kpi red blink">
-          <div class="val">2/3</div>
+          <div class="val">0/3</div>
           <div class="lbl">⚠️ 11KV_C</div>
         </div>
 </div>
@@ -121,6 +133,54 @@ footer{text-align:center;padding:14px;font-size:.72rem;color:#bbb}
           <tbody><tr>
               <td><strong>Deepak Kumar Biswal</strong></td>
               <td>11KV_A</td>
+              <td class="num">8</td>
+              <td class="num c-green">5</td>
+              <td class="num c-red">3</td>
+              <td>
+                <div class="prog-wrap">
+                  <div class="prog-bar" style="width:62%"></div>
+                  <span class="prog-lbl">62.5%</span>
+                </div>
+              </td>
+            </tr><tr>
+              <td><strong>Maneesha Samantray</strong></td>
+              <td>11KV_A</td>
+              <td class="num">8</td>
+              <td class="num c-green">7</td>
+              <td class="num c-red">1</td>
+              <td>
+                <div class="prog-wrap">
+                  <div class="prog-bar" style="width:87%"></div>
+                  <span class="prog-lbl">87.5%</span>
+                </div>
+              </td>
+            </tr><tr>
+              <td><strong>PRAVAT RANJAN SAMAL</strong></td>
+              <td>11KV_A</td>
+              <td class="num">3</td>
+              <td class="num c-green">2</td>
+              <td class="num c-red">0</td>
+              <td>
+                <div class="prog-wrap">
+                  <div class="prog-bar" style="width:66%"></div>
+                  <span class="prog-lbl">66.7%</span>
+                </div>
+              </td>
+            </tr><tr>
+              <td><strong>Monaranjan Nayak</strong></td>
+              <td>11KV_B</td>
+              <td class="num">9</td>
+              <td class="num c-green">6</td>
+              <td class="num c-red">3</td>
+              <td>
+                <div class="prog-wrap">
+                  <div class="prog-bar" style="width:66%"></div>
+                  <span class="prog-lbl">66.7%</span>
+                </div>
+              </td>
+            </tr><tr>
+              <td><strong>sidharth das</strong></td>
+              <td>11KV_B</td>
               <td class="num">5</td>
               <td class="num c-green">4</td>
               <td class="num c-red">1</td>
@@ -130,90 +190,6 @@ footer{text-align:center;padding:14px;font-size:.72rem;color:#bbb}
                   <span class="prog-lbl">80.0%</span>
                 </div>
               </td>
-            </tr><tr>
-              <td><strong>Maneesha Samantray</strong></td>
-              <td>11KV_A</td>
-              <td class="num">3</td>
-              <td class="num c-green">3</td>
-              <td class="num c-red">0</td>
-              <td>
-                <div class="prog-wrap">
-                  <div class="prog-bar" style="width:100%"></div>
-                  <span class="prog-lbl">100.0%</span>
-                </div>
-              </td>
-            </tr><tr>
-              <td><strong>PRAVAT RANJAN SAMAL</strong></td>
-              <td>11KV_A</td>
-              <td class="num">2</td>
-              <td class="num c-green">2</td>
-              <td class="num c-red">0</td>
-              <td>
-                <div class="prog-wrap">
-                  <div class="prog-bar" style="width:100%"></div>
-                  <span class="prog-lbl">100.0%</span>
-                </div>
-              </td>
-            </tr><tr>
-              <td><strong>Pravati Mishra</strong></td>
-              <td>11KV_A</td>
-              <td class="num">2</td>
-              <td class="num c-green">1</td>
-              <td class="num c-red">0</td>
-              <td>
-                <div class="prog-wrap">
-                  <div class="prog-bar" style="width:50%"></div>
-                  <span class="prog-lbl">50.0%</span>
-                </div>
-              </td>
-            </tr><tr>
-              <td><strong>Monaranjan Nayak</strong></td>
-              <td>11KV_B</td>
-              <td class="num">9</td>
-              <td class="num c-green">7</td>
-              <td class="num c-red">2</td>
-              <td>
-                <div class="prog-wrap">
-                  <div class="prog-bar" style="width:77%"></div>
-                  <span class="prog-lbl">77.8%</span>
-                </div>
-              </td>
-            </tr><tr>
-              <td><strong>sidharth das</strong></td>
-              <td>11KV_B</td>
-              <td class="num">8</td>
-              <td class="num c-green">5</td>
-              <td class="num c-red">3</td>
-              <td>
-                <div class="prog-wrap">
-                  <div class="prog-bar" style="width:62%"></div>
-                  <span class="prog-lbl">62.5%</span>
-                </div>
-              </td>
-            </tr><tr>
-              <td><strong>Paresh</strong></td>
-              <td>11KV_C</td>
-              <td class="num">10</td>
-              <td class="num c-green">6</td>
-              <td class="num c-red">3</td>
-              <td>
-                <div class="prog-wrap">
-                  <div class="prog-bar" style="width:60%"></div>
-                  <span class="prog-lbl">60.0%</span>
-                </div>
-              </td>
-            </tr><tr>
-              <td><strong>Sibaprasad1</strong></td>
-              <td>11KV_C</td>
-              <td class="num">8</td>
-              <td class="num c-green">5</td>
-              <td class="num c-red">3</td>
-              <td>
-                <div class="prog-wrap">
-                  <div class="prog-bar" style="width:62%"></div>
-                  <span class="prog-lbl">62.5%</span>
-                </div>
-              </td>
             </tr></tbody>
         </table><p style='margin-top:8px;font-size:0.75rem;color:#888;'>⚠️ Only calls from the last 30 minutes are shown.</p></div>
   </div>
@@ -221,8 +197,8 @@ footer{text-align:center;padding:14px;font-size:.72rem;color:#bbb}
     <div class="section-title">📜 Agent Status History (5-min snapshots, last 2 hrs)</div>
     <div class="section-body"><div style="overflow-x:auto">
             <table class="data-table">
-              <thead><tr><th style="min-width:130px">Agent Name</th><th>09:47</th><th>09:53</th><th>11:00</th><th>11:06</th><th>11:14</th><th>11:47</th></tr></thead>
-              <tbody><tr><td><strong>Deepak Kumar Biswal</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td></tr><tr><td><strong>Maneesha Samantray</strong></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td></tr><tr><td><strong>Monaranjan Nayak</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-gray'>N/A</span></td><td><span class='badge b-gray'>N/A</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td></tr><tr><td><strong>PRAVAT RANJAN SAMAL</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-green'>ONCALL</span></td></tr><tr><td><strong>Paresh</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-red'>NOTREADY</span></td></tr><tr><td><strong>Pravati Mishra</strong></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-gray'>BLOCK</span></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-gray'>BLOCK</span></td></tr><tr><td><strong>Sanjib Swain</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-gray'>N/A</span></td></tr><tr><td><strong>Sibaprasad1</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-red'>NOTREADY</span></td></tr><tr><td><strong>sidharth das</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td></tr></tbody>
+              <thead><tr><th style="min-width:130px">Agent Name</th><th>11:00</th><th>11:06</th><th>11:14</th><th>11:47</th><th>12:03</th></tr></thead>
+              <tbody></td><td><strong>Deepak Kumar Biswal</strong></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-blue'>READY</span></td></tr></td><td><strong>Maneesha Samantray</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td></tr></td><td><strong>Monaranjan Nayak</strong></td><td><span class='badge b-gray'>N/A</span></td><td><span class='badge b-gray'>N/A</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td></tr></td><td><strong>PRAVAT RANJAN SAMAL</strong></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-blue'>READY</span></td></tr></td><td><strong>Paresh</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-red'>NOTREADY</span></td><td><span class='badge b-gray'>N/A</span></td></tr></td><td><strong>Pravati Mishra</strong></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-gray'>BLOCK</span></td><td><span class='badge b-blue'>READY</span></td><td><span class='badge b-gray'>BLOCK</span></td><td><span class='badge b-blue'>READY</span></td></tr></td><td><strong>Sanjib Swain</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-gray'>N/A</span></td><td><span class='badge b-gray'>N/A</span></td></tr></td><td><strong>Sibaprasad1</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-red'>NOTREADY</span></td><td><span class='badge b-gray'>N/A</span></td></tr></td><td><strong>sidharth das</strong></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td><td><span class='badge b-green'>ONCALL</span></td></tr></tbody>
             </table></div></div>
     <p style="padding:8px 16px 12px;font-size:0.75rem;color:#888;">
       🟢 On Call &nbsp; 🔴 Not Ready &nbsp; 🔵 Ready &nbsp; ⚪ N/A
@@ -233,18 +209,16 @@ footer{text-align:center;padding:14px;font-size:.72rem;color:#bbb}
 <div id="tab-live" class="tab-pane">
   <div class="section">
     <div class="section-title">👥 All Live Agents — Current Snapshot</div>
-    <div class="section-body"><table class="data-table"><thead><tr><th>Agent Name</th><th>User ID</th><th>Extension</th><th>Role</th><th>Status</th><th>Group</th><th>Login Time</th><th>Idle Duration</th><th>Barging</th><th>Action</th><th>Reset</th><th>Snapshot Time</th></tr></thead><tbody><tr><td>Deepak Kumar Biswal</td><td>deepak</td><td>800015</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_A</td><td>2026-05-03 11:44:27</td><td>2 minutes, 50 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 11:47:27</td></tr><tr><td>Maneesha Samantray</td><td>maneesha2</td><td>800002</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_A</td><td>2026-05-03 11:46:14</td><td>1 minute, 3 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 11:47:27</td></tr><tr><td>Monaranjan Nayak</td><td>manoranjan</td><td>800005</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_B</td><td>2026-05-03 11:46:08</td><td>1 minute, 9 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 11:47:27</td></tr><tr><td>Paresh</td><td>paresh</td><td>800018</td><td>agent</td><td><span class="badge b-red">NOTREADY</span></td><td>11KV_C</td><td>2026-05-03 11:47:06</td><td>11 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 11:47:27</td></tr><tr><td>PRAVAT RANJAN SAMAL</td><td>pravat</td><td>800009</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_A</td><td>2026-05-03 11:44:42</td><td>2 minutes, 35 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 11:47:27</td></tr><tr><td>Pravati Mishra</td><td>prabhati</td><td>800004</td><td>agent</td><td><span class="badge b-gray">BLOCK</span></td><td>11KV_A</td><td>2026-05-03 11:47:13</td><td>4 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 11:47:27</td></tr><tr><td>Sibaprasad1</td><td>sibaprasad1</td><td>800020</td><td>agent</td><td><span class="badge b-red">NOTREADY</span></td><td>11KV_C</td><td>2026-05-03 11:47:06</td><td>11 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 11:47:27</td></tr><tr><td>sidharth das</td><td>sidharth12</td><td>800006</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_B</td><td>2026-05-03 11:45:12</td><td>2 minutes, 5 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 11:47:27</td></tr></tbody></table></div>
+    <div class="section-body"><table class="data-table"><thead><tr><th>Agent Name</th><th>User ID</th><th>Extension</th><th>Role</th><th>Status</th><th>Group</th><th>Login Time</th><th>Idle Duration</th><th>Barging</th><th>Action</th><th>Reset</th><th>Snapshot Time</th><tr></thead><tbody><tr><td>Deepak Kumar Biswal</td><td>deepak</td><td>800015</td><td>agent</td><td><span class="badge b-blue">READY</span></td><td>11KV_A</td><td>2026-05-03 12:01:07</td><td>2 minutes, 8 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-03 12:03:25</td></tr><tr><td>Maneesha Samantray</td><td>maneesha2</td><td>800002</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_A</td><td>2026-05-03 12:00:04</td><td>3 minutes, 11 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-03 12:03:25</td></tr><tr><td>Monaranjan Nayak</td><td>manoranjan</td><td>800005</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_B</td><td>2026-05-03 12:00:38</td><td>2 minutes, 37 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-03 12:03:25</td></tr><tr><td>PRAVAT RANJAN SAMAL</td><td>pravat</td><td>800009</td><td>agent</td><td><span class="badge b-blue">READY</span></td><td>11KV_A</td><td>2026-05-03 12:01:23</td><td>1 minute, 52 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-03 12:03:25</td></tr><tr><td>Pravati Mishra</td><td>prabhati</td><td>800004</td><td>agent</td><td><span class="badge b-blue">READY</span></td><td>11KV_A</td><td>2026-05-03 11:58:53</td><td>4 minutes, 22 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-03 12:03:25</td></tr><tr><td>sidharth das</td><td>sidharth12</td><td>800006</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_B</td><td>2026-05-03 11:54:57</td><td>8 minutes, 18 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-03 12:03:25</td></tr></tbody></table></div>
   </div>
 </div>
-<footer>TPCODL PSCC IVR Automation v9.1 | Current shift KPIs | Group chart only 11KV_* | Agent table includes group</footer>
+<footer>TPCODL PSCC IVR Automation v9.2 | Group‑wise KPIs for current shift (A) | Last 3 cards: group availability</footer>
 
 <script>
 function showTab(name){
@@ -258,17 +232,17 @@ Chart.defaults.font.size=11;
 Chart.defaults.plugins.legend.position='bottom';
 
 const hLabels     = ["00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"];
-const hTotal      = [39, 12, 9, 6, 8, 9, 7, 8, 3, 12, 13, 19, 21, 38, 40, 50, 68, 85, 63, 63, 72, 75, 147, 76, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-const hAns        = [36, 12, 9, 6, 8, 9, 6, 8, 3, 12, 9, 14, 13, 16, 21, 28, 36, 38, 38, 44, 48, 39, 42, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-const hAbn        = [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 5, 3, 3, 6, 9, 9, 8, 10, 5, 6, 8, 17, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-const hLiveAgents = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 9, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const hTotal      = [39, 12, 9, 6, 8, 9, 7, 8, 3, 12, 13, 19, 21, 38, 40, 50, 68, 85, 63, 63, 72, 75, 147, 98, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const hAns        = [36, 12, 9, 6, 8, 9, 6, 8, 3, 12, 9, 14, 13, 16, 21, 28, 36, 38, 38, 44, 48, 39, 42, 36, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const hAbn        = [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 5, 3, 3, 6, 9, 9, 8, 10, 5, 6, 8, 17, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const hLiveAgents = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 8, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 const grpLabels   = ["11KV_A", "11KV_B", "11KV_C"];
-const grpAns      = [136, 175, 207];
-const grpAbn      = [22, 59, 27];
+const grpAns      = [144, 181, 207];
+const grpAbn      = [25, 62, 28];
 const durLabels   = ["0\u201330s", "31\u201360s", "61\u2013120s", "2\u20135 min", "5 min+"];
-const durVals     = [105, 198, 198, 343, 99];
-const totalAns    = 518;
-const totalAbn    = 108;
+const durVals     = [102, 202, 204, 357, 101];
+const totalAns    = 532;
+const totalAbn    = 115;
 const C = {
   blue:'rgba(21,101,192,0.85)', blueL:'rgba(21,101,192,0.15)',
   green:'rgba(46,125,50,0.85)', greenL:'rgba(46,125,50,0.15)',
@@ -297,7 +271,7 @@ new Chart(document.getElementById('chartHalfHour'), {
     plugins:{ tooltip:{ callbacks:{ afterBody(items){ const i=items[0].dataIndex; const t=hTotal[i]; return t?[`Answer Rate: ${t?((hAns[i]/t)*100).toFixed(1):0}%`]:[]; } } } }
   }
 });
-// Donut (full day overall, not shift specific)
+// Donut (full day overall)
 new Chart(document.getElementById('chartDonut'),{ type:'doughnut', data:{labels:['Answered','Abandoned'], datasets:[{ data:[totalAns,totalAbn], backgroundColor:[C.green,C.red], borderWidth:2, hoverOffset:10 }] }, options:{ cutout:'65%', plugins:{ tooltip:{ callbacks:{ label(ctx){ const tot=ctx.dataset.data.reduce((a,b)=>a+b,0); const pct=tot?((ctx.parsed/tot)*100).toFixed(1):0; return ` ${ctx.label}: ${ctx.parsed.toLocaleString()} (${pct}%)`; } } } } } });
 // Group chart (only the three groups)
 new Chart(document.getElementById('chartGroup'),{ type:'bar', data:{ labels: grpLabels, datasets:[ { label:'Answered', data:grpAns, backgroundColor:C.green, borderRadius:4, stack:'g' }, { label:'Abandoned', data:grpAbn, backgroundColor:C.red, borderRadius:4, stack:'g' } ] }, options:{ scales:{ x:{ stacked:true, grid:{display:false} }, y:{ stacked:true, beginAtZero:true, ticks:{ callback:v=>Number.isInteger(v)?v:null } } } } });
