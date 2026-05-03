@@ -3,41 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="refresh" content="300">
-<title>TPCODL IVR Dashboard v7.4</title>
+<title>TPCODL IVR Dashboard v8.0</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f6;color:#333;font-size:13px}
-.header{background:linear-gradient(135deg,#0d3b6e,#1565c0);color:#fff;padding:16px 26px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.header{background:linear-gradient(135deg,#0d3b6e,#1565c0);color:#fff;padding:16px 26px;
+         display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.2)}
 .header h1{font-size:1.2rem;font-weight:600}
 .header .ts{font-size:.75rem;opacity:.85;text-align:right;line-height:1.5}
+/* KPI row */
 .kpi-row{display:flex;gap:12px;padding:16px 26px;flex-wrap:wrap}
-.kpi{flex:1;min-width:120px;background:#fff;border-radius:10px;padding:14px 10px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.07);border-top:4px solid #ddd;transition:transform .15s,box-shadow .15s}
+.kpi{flex:1;min-width:110px;background:#fff;border-radius:10px;padding:14px 10px;
+      text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.07);
+      border-top:4px solid #ddd;transition:transform .15s,box-shadow .15s}
 .kpi:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(0,0,0,.12)}
 .kpi.blue{border-top-color:#1565c0}.kpi.blue .val{color:#1565c0}
 .kpi.green{border-top-color:#2e7d32}.kpi.green .val{color:#2e7d32}
 .kpi.red{border-top-color:#c62828}.kpi.red .val{color:#c62828}
 .kpi.orange{border-top-color:#e65100}.kpi.orange .val{color:#e65100}
 .kpi.teal{border-top-color:#00695c}.kpi.teal .val{color:#00695c}
-.kpi.purple{border-top-color:#6a1b9a}.kpi.purple .val{color:#6a1b9a}
-.kpi.indigo{border-top-color:#283593}.kpi.indigo .val{color:#283593}
 .kpi .val{font-size:1.8rem;font-weight:700;line-height:1.1}
-.kpi .lbl{font-size:.68rem;color:#999;margin-top:4px;text-transform:uppercase;letter-spacing:.4px}
+.kpi .lbl{font-size:.67rem;color:#999;margin-top:4px;text-transform:uppercase;letter-spacing:.4px}
+/* Blinking alert for under-staffed groups */
+@keyframes blink-border{0%,100%{box-shadow:0 0 0 3px #c62828}50%{box-shadow:0 0 0 3px transparent}}
+.blink{animation:blink-border 1.2s ease-in-out infinite}
+/* Tabs */
 .tab-bar{display:flex;gap:0;padding:0 26px;margin-bottom:-1px;position:relative;z-index:1}
-.tab-btn{padding:9px 20px;cursor:pointer;border:1px solid #ddd;border-bottom:none;background:#e8ecf1;color:#666;font-size:.82rem;font-weight:600;border-radius:6px 6px 0 0;margin-right:4px;transition:background .15s}
+.tab-btn{padding:9px 18px;cursor:pointer;border:1px solid #ddd;border-bottom:none;
+          background:#e8ecf1;color:#666;font-size:.81rem;font-weight:600;
+          border-radius:6px 6px 0 0;margin-right:4px;transition:background .15s}
 .tab-btn.active{background:#fff;color:#1565c0;border-color:#1565c0 #1565c0 #fff}
 .tab-pane{display:none;padding:20px 26px}
 .tab-pane.active{display:block}
+/* Charts */
 .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
 @media(max-width:960px){.chart-grid{grid-template-columns:1fr}}
 .chart-card{background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.07);padding:14px}
-.chart-card h3{font-size:.75rem;font-weight:700;color:#555;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;border-left:3px solid #1565c0;padding-left:8px}
-.chart-card canvas{max-height:260px}
-.section{background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:20px;overflow:hidden}
-.section-title{background:#0d3b6e;color:#fff;padding:10px 16px;font-weight:600;font-size:.83rem;letter-spacing:.3px}
+.chart-card h3{font-size:.74rem;font-weight:700;color:#555;margin-bottom:10px;
+                text-transform:uppercase;letter-spacing:.5px;
+                border-left:3px solid #1565c0;padding-left:8px}
+.chart-card canvas{max-height:280px}
+/* Sections */
+.section{background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.07);
+          margin-bottom:20px;overflow:hidden}
+.section-title{background:#0d3b6e;color:#fff;padding:10px 16px;
+                font-weight:600;font-size:.83rem;letter-spacing:.3px}
 .section-body{overflow-x:auto}
+/* Tables */
 table.data-table{width:100%;border-collapse:collapse;font-size:.8rem}
-table.data-table th{background:#1a4f8a;color:#fff;padding:8px 11px;text-align:left;white-space:nowrap;position:sticky;top:0}
+table.data-table th{background:#1a4f8a;color:#fff;padding:8px 11px;
+                     text-align:left;white-space:nowrap;position:sticky;top:0}
 table.data-table td{padding:7px 11px;border-bottom:1px solid #f0f0f0;white-space:nowrap}
 table.data-table tr:nth-child(even) td{background:#f5f8ff}
 table.data-table tr:hover td{background:#e3f0ff}
@@ -53,78 +69,143 @@ table.data-table tr:hover td{background:#e3f0ff}
 .b-blue{background:#bbdefb;color:#0d47a1}
 .b-gray{background:#e0e0e0;color:#424242}
 .no-data{padding:16px;color:#bbb;font-style:italic}
+/* Group availability cards */
+.grp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+@media(max-width:900px){.grp-grid{grid-template-columns:1fr}}
+.grp-card{background:#fff;border-radius:10px;overflow:hidden;
+           box-shadow:0 2px 10px rgba(0,0,0,.09)}
+.grp-card-hdr{color:#fff;padding:10px 14px;font-weight:700;font-size:.85rem;
+               display:flex;justify-content:space-between;align-items:center}
+.grp-alert{background:rgba(255,255,255,.25);padding:2px 10px;
+            border-radius:10px;font-size:.75rem;
+            animation:blink-border 1s ease-in-out infinite}
 footer{text-align:center;padding:14px;font-size:.72rem;color:#bbb}
 </style>
 </head>
 <body>
-<div class="header"><h1>&#127970; TPCODL PSCC — IVR Performance Dashboard</h1><span class="ts">Last updated: 03-May-2026 08:11:03<br>Auto-refresh 5 min</span></div>
+<div class="header">
+  <h1>&#127970; TPCODL PSCC — IVR Performance Dashboard</h1>
+  <span class="ts">Last updated: 03-May-2026 08:34:32<br>Auto-refresh 5 min</span>
+</div>
+
+<!-- KPI Row: first 5 = call stats, last 3 = group availability -->
 <div class="kpi-row">
-  <div class="kpi blue"><div class="val">318</div><div class="lbl">Total Incoming</div></div>
-  <div class="kpi green"><div class="val">222</div><div class="lbl">Answered</div></div>
-  <div class="kpi red"><div class="val">35</div><div class="lbl">Abandoned</div></div>
-  <div class="kpi orange"><div class="val">69.81%</div><div class="lbl">Answer Rate</div></div>
-  <div class="kpi teal"><div class="val">149.27</div><div class="lbl">Avg Duration (s)</div></div>
-  <div class="kpi green"><div class="val">8</div><div class="lbl">Agents On Call</div></div>
-  <div class="kpi purple"><div class="val">0</div><div class="lbl">Not Ready</div></div>
-  <div class="kpi indigo"><div class="val">2</div><div class="lbl">Ready</div></div>
+  <div class="kpi blue"><div class="val">366</div><div class="lbl">Total Incoming</div></div>
+  <div class="kpi green"><div class="val">250</div><div class="lbl">Answered</div></div>
+  <div class="kpi red"><div class="val">41</div><div class="lbl">Abandoned</div></div>
+  <div class="kpi orange"><div class="val">68.31%</div><div class="lbl">Answer Rate</div></div>
+  <div class="kpi teal"><div class="val">155.12</div><div class="lbl">Avg Duration (s)</div></div>
+  
+        <div class="kpi green ">
+          <div class="val">4/4</div>
+          <div class="lbl">✅ 11KV_A</div>
+        </div>
+        <div class="kpi green ">
+          <div class="val">2/2</div>
+          <div class="lbl">✅ 11KV_B</div>
+        </div>
+        <div class="kpi green ">
+          <div class="val">3/3</div>
+          <div class="lbl">✅ 11KV_C</div>
+        </div>
 </div>
+
+<!-- Tabs -->
 <div class="tab-bar">
-  <div class="tab-btn active" onclick="showTab('charts')">📈 Charts (Full Day)</div>
-  <div class="tab-btn" onclick="showTab('agentperf')">👨‍💻 Agent Performance (Last 30 min)</div>
-  <div class="tab-btn" onclick="showTab('live')">👥 Live Agents</div>
+  <div class="tab-btn active" onclick="showTab('charts')">&#128200; Charts</div>
+  <div class="tab-btn" onclick="showTab('agentperf')">&#128104;&#8205;&#128187; Agent Performance</div>
+  <div class="tab-btn" onclick="showTab('live')">&#128101; Live Agents &amp; Groups</div>
 </div>
+
 <!-- Charts Tab -->
 <div id="tab-charts" class="tab-pane active">
-  <div class="chart-grid">
-    <div class="chart-card"><h3>📊 Half‑Hourly Call Trend (full day)</h3><canvas id="chartHalfHour"></canvas></div>
-    <div class="chart-card"><h3>🥧 Answered vs Abandoned (full day)</h3><canvas id="chartDonut"></canvas></div>
+  <div class="chart-grid" style="grid-template-columns:1fr">
+    <div class="chart-card">
+      <h3>&#128336; 30-Min Interval Trend — Calls &amp; Live Agents (Today)</h3>
+      <canvas id="chartHalfHour" style="max-height:300px"></canvas>
+    </div>
   </div>
   <div class="chart-grid">
-    <div class="chart-card"><h3>📊 Group-wise Performance (full day)</h3><canvas id="chartGroup"></canvas></div>
-    <div class="chart-card"><h3>⏱️ Call Duration Distribution (full day)</h3><canvas id="chartDur"></canvas></div>
+    <div class="chart-card"><h3>&#127829; Answered vs Abandoned</h3><canvas id="chartDonut"></canvas></div>
+    <div class="chart-card"><h3>&#128101; Group-wise Call Performance</h3><canvas id="chartGroup"></canvas></div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>&#9201; Call Duration Distribution</h3><canvas id="chartDur"></canvas></div>
+    <div class="chart-card"><h3>&#128239; Agent Answer Rate %</h3><canvas id="chartAgentRate"></canvas></div>
   </div>
 </div>
-<!-- Agent Performance Tab (last 30 min charts + status history) -->
+
+<!-- Agent Performance Tab -->
 <div id="tab-agentperf" class="tab-pane">
   <div class="chart-grid">
-    <div class="chart-card"><h3>✅ Answered Calls per Agent (last 30 min)</h3><canvas id="chartAgentAns"></canvas></div>
-    <div class="chart-card"><h3>❌ Abandoned Calls per Agent (last 30 min)</h3><canvas id="chartAgentAbn"></canvas></div>
-  </div>
-  <div class="chart-grid" style="grid-template-columns:1fr">
-    <div class="chart-card"><h3>📈 Agent Answer Rate (%) (last 30 min)</h3><canvas id="chartAgentRate"></canvas></div>
+    <div class="chart-card"><h3>&#9989; Answered Calls per Agent (last 30 min)</h3><canvas id="chartAgentAns"></canvas></div>
+    <div class="chart-card"><h3>&#10060; Abandoned Calls per Agent (last 30 min)</h3><canvas id="chartAgentAbn"></canvas></div>
   </div>
   <div class="section">
-    <div class="section-title">📋 Agent Performance Table (last 30 min)</div>
+    <div class="section-title">&#128203; Agent Performance Table (last 30 min)</div>
     <div class="section-body"><table class="data-table">
           <thead><tr>
             <th>Agent Name</th><th>Total Calls</th>
             <th>Answered ✓</th><th>Abandoned ✗</th><th>Answer Rate</th>
           </td></thead><tbody><tr>
-              <td><strong>Monaranjan Nayak</strong></td>
-              <td class="num">12</td>
-              <td class="num c-green">10</td>
-              <td class="num c-red">1</td>
-              <td>
-                <div class="prog-wrap">
-                  <div class="prog-bar" style="width:83%"></div>
-                  <span class="prog-lbl">83.3%</span>
-                </div>
-              <tr>
-            </tr><tr>
               <td><strong>sidharth das</strong></td>
-              <td class="num">10</td>
-              <td class="num c-green">5</td>
-              <td class="num c-red">5</td>
+              <td class="num">9</td>
+              <td class="num c-green">9</td>
+              <td class="num c-red">0</td>
               <td>
                 <div class="prog-wrap">
-                  <div class="prog-bar" style="width:50%"></div>
-                  <span class="prog-lbl">50.0%</span>
+                  <div class="prog-bar" style="width:100%"></div>
+                  <span class="prog-lbl">100.0%</span>
                 </div>
               <tr>
             </tr><tr>
               <td><strong>Sanjib Swain</strong></td>
-              <td class="num">5</td>
-              <td class="num c-green">5</td>
+              <td class="num">9</td>
+              <td class="num c-green">8</td>
+              <td class="num c-red">1</td>
+              <td>
+                <div class="prog-wrap">
+                  <div class="prog-bar" style="width:88%"></div>
+                  <span class="prog-lbl">88.9%</span>
+                </div>
+              <tr>
+            </tr><tr>
+              <td><strong>Monaranjan Nayak</strong></td>
+              <td class="num">7</td>
+              <td class="num c-green">4</td>
+              <td class="num c-red">3</td>
+              <td>
+                <div class="prog-wrap">
+                  <div class="prog-bar" style="width:57%"></div>
+                  <span class="prog-lbl">57.1%</span>
+                </div>
+              <tr>
+            </tr><tr>
+              <td><strong>Maneesha Samantray</strong></td>
+              <td class="num">6</td>
+              <td class="num c-green">4</td>
+              <td class="num c-red">2</td>
+              <td>
+                <div class="prog-wrap">
+                  <div class="prog-bar" style="width:66%"></div>
+                  <span class="prog-lbl">66.7%</span>
+                </div>
+              <tr>
+            </tr><tr>
+              <td><strong>Deepak Kumar Biswal</strong></td>
+              <td class="num">4</td>
+              <td class="num c-green">3</td>
+              <td class="num c-red">1</td>
+              <td>
+                <div class="prog-wrap">
+                  <div class="prog-bar" style="width:75%"></div>
+                  <span class="prog-lbl">75.0%</span>
+                </div>
+              <tr>
+            </tr><tr>
+              <td><strong>Sibaprasad1</strong></td>
+              <td class="num">3</td>
+              <td class="num c-green">3</td>
               <td class="num c-red">0</td>
               <td>
                 <div class="prog-wrap">
@@ -134,24 +215,13 @@ footer{text-align:center;padding:14px;font-size:.72rem;color:#bbb}
               <tr>
             </tr><tr>
               <td><strong>Paresh</strong></td>
-              <td class="num">5</td>
-              <td class="num c-green">5</td>
+              <td class="num">2</td>
+              <td class="num c-green">2</td>
               <td class="num c-red">0</td>
               <td>
                 <div class="prog-wrap">
                   <div class="prog-bar" style="width:100%"></div>
                   <span class="prog-lbl">100.0%</span>
-                </div>
-              <tr>
-            </tr><tr>
-              <td><strong>Deepak Kumar Biswal</strong></td>
-              <td class="num">4</td>
-              <td class="num c-green">2</td>
-              <td class="num c-red">2</td>
-              <td>
-                <div class="prog-wrap">
-                  <div class="prog-bar" style="width:50%"></div>
-                  <span class="prog-lbl">50.0%</span>
                 </div>
               <tr>
             </tr><tr>
@@ -166,29 +236,7 @@ footer{text-align:center;padding:14px;font-size:.72rem;color:#bbb}
                 </div>
               <tr>
             </tr><tr>
-              <td><strong>Maneesha Samantray</strong></td>
-              <td class="num">2</td>
-              <td class="num c-green">1</td>
-              <td class="num c-red">0</td>
-              <td>
-                <div class="prog-wrap">
-                  <div class="prog-bar" style="width:50%"></div>
-                  <span class="prog-lbl">50.0%</span>
-                </div>
-              <tr>
-            </tr><tr>
               <td><strong>PRAVAT RANJAN SAMAL</strong></td>
-              <td class="num">1</td>
-              <td class="num c-green">1</td>
-              <td class="num c-red">0</td>
-              <td>
-                <div class="prog-wrap">
-                  <div class="prog-bar" style="width:100%"></div>
-                  <span class="prog-lbl">100.0%</span>
-                </div>
-              <tr>
-            </tr><tr>
-              <td><strong>Sibaprasad1</strong></td>
               <td class="num">1</td>
               <td class="num c-green">1</td>
               <td class="num c-red">0</td>
@@ -201,34 +249,121 @@ footer{text-align:center;padding:14px;font-size:.72rem;color:#bbb}
             </tr></tbody></table><p style='margin-top:8px;font-size:0.75rem;color:#888;'>⚠️ Only calls from the last 30 minutes are shown.</p></div>
   </div>
   <div class="section">
-    <div class="section-title">📜 Agent Status History (5‑min snapshots, last 2 hours)</div>
-    <div class="section-body"><table class="data-table">
-            <thead><tr><th>Agent Name</th><th>08:10</th></tr></thead>
-            <tbody><td><strong>Deepak Kumar Biswal</strong></td><td><span class='badge b-green'>ONCALL</span></td></tr><td><strong>Maneesha Samantray</strong></td><td><span class='badge b-blue'>READY</span></td></tr><td><strong>Monaranjan Nayak</strong></td><td><span class='badge b-green'>ONCALL</span></td></tr><td><strong>PRAVAT RANJAN SAMAL</strong></td><td><span class='badge b-green'>ONCALL</span></td></tr><td><strong>Paresh</strong></td><td><span class='badge b-green'>ONCALL</span></td></tr><td><strong>Pravati Mishra</strong></td><td><span class='badge b-green'>ONCALL</span></td></tr><td><strong>Sanjib Swain</strong></td><td><span class='badge b-green'>ONCALL</span></td></tr><td><strong>Sibaprasad1</strong></td><td><span class='badge b-green'>ONCALL</span></td></tr><td><strong>madan</strong></td><td><span class='badge b-blue'>ready</span></td></tr><td><strong>sidharth das</strong></td><td><span class='badge b-green'>ONCALL</span></td></tr></tbody>
-          </table></div>
-    <p style="padding:0 16px 12px;font-size:0.75rem;color:#888;">Each column is a 5‑minute snapshot timestamp. Colour codes: 🔵 Ready, 🟢 On Call, 🔴 Not Ready, ⚪ N/A.</p>
+    <div class="section-title">&#128260; Agent Status History (5-min snapshots, last 2 hrs)</div>
+    <div class="section-body"><div style="overflow-x:auto">
+            <table class="data-table">
+              <thead><tr><th style="min-width:130px">Agent Name</th><th>08:34</th></tr></thead>
+              <tbody><tr><td><strong>Deepak Kumar Biswal</strong></td><td><span class='badge b-green'>ONCALL</span></td></tr><tr><td><strong>Maneesha Samantray</strong></td><td><span class='badge b-green'>ONCALL</span></td></tr><tr><td><strong>Monaranjan Nayak</strong></td><td><span class='badge b-green'>ONCALL</span></td></tr><tr><td><strong>PRAVAT RANJAN SAMAL</strong></td><td><span class='badge b-red'>NOTREADY</span></td></tr><tr><td><strong>Paresh</strong></td><td><span class='badge b-red'>NOTREADY</span></td></tr><tr><td><strong>Pravati Mishra</strong></td><td><span class='badge b-blue'>READY</span></td></tr><tr><td><strong>Sanjib Swain</strong></td><td><span class='badge b-green'>ONCALL</span></td></tr><tr><td><strong>Sibaprasad1</strong></td><td><span class='badge b-green'>ONCALL</span></td></tr><tr><td><strong>madan</strong></td><td><span class='badge b-blue'>ready</span></td></tr><tr><td><strong>sidharth das</strong></td><td><span class='badge b-green'>ONCALL</span></td></tr></tbody>
+            </table></div></div>
+    <p style="padding:8px 16px 12px;font-size:0.75rem;color:#888;">
+      &#128994; Ready &nbsp; &#128309; On Call &nbsp; &#128308; Not Ready &nbsp; &#9898; N/A
+    </p>
   </div>
 </div>
-<!-- Live Agents Tab -->
+
+<!-- Live Agents & Groups Tab -->
 <div id="tab-live" class="tab-pane">
+  <div class="section-title" style="background:#0d3b6e;color:#fff;padding:10px 16px;
+       font-weight:600;font-size:.83rem;margin-bottom:16px;border-radius:8px 8px 0 0">
+    &#128101; Group-wise Agent Availability — 03-May-2026 08:34:32
+  </div>
+  <div class="grp-grid">
+        <div class="grp-card">
+          <div class="grp-card-hdr" style="background:#2e7d32">
+            <span>&#128101; 11KV_A</span>
+            <span>4 / 4 agents </span>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Agent</th><th>User ID</th><th>Status</th><th>Idle</th></tr></thead>
+            <tbody><tr>
+              <td>Deepak Kumar Biswal</td>
+              <td><code style="font-size:.75rem">deepak</code></td>
+              <td><span class="badge b-green">ONCALL</span></td>
+              <td style="color:#888;font-size:.75rem">2 minutes, 52 seconds</td>
+            </tr><tr>
+              <td>Maneesha Samantray</td>
+              <td><code style="font-size:.75rem">maneesha2</code></td>
+              <td><span class="badge b-green">ONCALL</span></td>
+              <td style="color:#888;font-size:.75rem">1 minute, 28 seconds</td>
+            </tr><tr>
+              <td>PRAVAT RANJAN SAMAL</td>
+              <td><code style="font-size:.75rem">pravat</code></td>
+              <td><span class="badge b-red">NOTREADY</span></td>
+              <td style="color:#888;font-size:.75rem">2 seconds</td>
+            </tr><tr>
+              <td>Pravati Mishra</td>
+              <td><code style="font-size:.75rem">prabhati</code></td>
+              <td><span class="badge b-blue">READY</span></td>
+              <td style="color:#888;font-size:.75rem">2 minutes, 52 seconds</td>
+            </tr></tbody>
+          </table>
+        </div>
+        <div class="grp-card">
+          <div class="grp-card-hdr" style="background:#2e7d32">
+            <span>&#128101; 11KV_B</span>
+            <span>2 / 2 agents </span>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Agent</th><th>User ID</th><th>Status</th><th>Idle</th></tr></thead>
+            <tbody><tr>
+              <td>Monaranjan Nayak</td>
+              <td><code style="font-size:.75rem">manoranjan</code></td>
+              <td><span class="badge b-green">ONCALL</span></td>
+              <td style="color:#888;font-size:.75rem">10 seconds</td>
+            </tr><tr>
+              <td>sidharth das</td>
+              <td><code style="font-size:.75rem">sidharth12</code></td>
+              <td><span class="badge b-green">ONCALL</span></td>
+              <td style="color:#888;font-size:.75rem">5 minutes, 4 seconds</td>
+            </tr></tbody>
+          </table>
+        </div>
+        <div class="grp-card">
+          <div class="grp-card-hdr" style="background:#2e7d32">
+            <span>&#128101; 11KV_C</span>
+            <span>3 / 3 agents </span>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Agent</th><th>User ID</th><th>Status</th><th>Idle</th></tr></thead>
+            <tbody><tr>
+              <td>Paresh</td>
+              <td><code style="font-size:.75rem">paresh</code></td>
+              <td><span class="badge b-red">NOTREADY</span></td>
+              <td style="color:#888;font-size:.75rem">2 seconds</td>
+            </tr><tr>
+              <td>Sanjib Swain</td>
+              <td><code style="font-size:.75rem">sanjib1</code></td>
+              <td><span class="badge b-green">ONCALL</span></td>
+              <td style="color:#888;font-size:.75rem">17 seconds</td>
+            </tr><tr>
+              <td>Sibaprasad1</td>
+              <td><code style="font-size:.75rem">sibaprasad1</code></td>
+              <td><span class="badge b-green">ONCALL</span></td>
+              <td style="color:#888;font-size:.75rem">4 minutes, 5 seconds</td>
+            </tr></tbody>
+          </table>
+        </div></div>
+
   <div class="section">
-    <div class="section-title">👥 Live Agent Status — 03-May-2026 08:11:03</div>
-    <div class="section-body"><table class="data-table"><thead><tr><th>Agent Name</th><th>User ID</th><th>Extension</th><th>Role</th><th>Status</th><th>Group</th><th>Login Time</th><th>Idle Duration</th><th>Barging</th><th>Action</th><th>Reset</th><th>Snapshot Time</th></tr></thead><tbody><tr><td>Deepak Kumar Biswal</td><td>deepak</td><td>800015</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_A</td><td>2026-05-03 08:09:55</td><td>28 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 08:10:32</td></tr><tr><td>madan</td><td>madan</td><td>800014</td><td>agent</td><td><span class="badge b-blue">ready</span></td><td>Emergency</td><td>2026-05-03 07:51:29</td><td>18 minutes, 54 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 08:10:32</td></tr><tr><td>Maneesha Samantray</td><td>maneesha2</td><td>800002</td><td>agent</td><td><span class="badge b-blue">READY</span></td><td>11KV_A</td><td>2026-05-03 08:09:33</td><td>50 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 08:10:32</td></tr><tr><td>Monaranjan Nayak</td><td>manoranjan</td><td>800005</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_B</td><td>2026-05-03 08:09:06</td><td>1 minute, 17 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 08:10:32</td></tr><tr><td>Paresh</td><td>paresh</td><td>800018</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_C</td><td>2026-05-03 08:07:19</td><td>3 minutes, 4 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 08:10:32</td></tr><tr><td>PRAVAT RANJAN SAMAL</td><td>pravat</td><td>800009</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_A</td><td>2026-05-03 08:08:26</td><td>1 minute, 57 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 08:10:32</td></tr><tr><td>Pravati Mishra</td><td>prabhati</td><td>800004</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_A</td><td>2026-05-03 08:09:50</td><td>33 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 08:10:32</td></tr><tr><td>Sanjib Swain</td><td>sanjib1</td><td>800017</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_C</td><td>2026-05-03 08:07:25</td><td>2 minutes, 58 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 08:10:32</td></tr><tr><td>Sibaprasad1</td><td>sibaprasad1</td><td>800020</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_C</td><td>2026-05-03 08:08:24</td><td>1 minute, 59 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 08:10:32</td></tr><tr><td>sidharth das</td><td>sidharth12</td><td>800006</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_B</td><td>2026-05-03 08:09:27</td><td>56 seconds</td><td>Click</td><td>Toggle Dropdown
- Change Group</td><td>ClickClick2</td><td>2026-05-03 08:10:32</td></tr></tbody></table></div>
+    <div class="section-title">&#128203; All Live Agents — Current Snapshot</div>
+    <div class="section-body"><table class="data-table"><thead><tr><th>Agent Name</th><th>User ID</th><th>Extension</th><th>Role</th><th>Status</th><th>Group</th><th>Login Time</th><th>Idle Duration</th><th>Barging</th><th>Action</th><th>Reset</th><th>Snapshot Time</th></tr></thead><tbody><tr><td>Deepak Kumar Biswal</td><td>deepak</td><td>800015</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_A</td><td>2026-05-03 08:31:01</td><td>2 minutes, 52 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-03 08:34:02</td></tr><tr><td>madan</td><td>madan</td><td>800014</td><td>agent</td><td><span class="badge b-blue">ready</span></td><td>Emergency</td><td>2026-05-03 07:51:29</td><td>42 minutes, 24 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-03 08:34:02</td></tr><tr><td>Maneesha Samantray</td><td>maneesha2</td><td>800002</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_A</td><td>2026-05-03 08:32:25</td><td>1 minute, 28 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-03 08:34:02</td></tr><tr><td>Monaranjan Nayak</td><td>manoranjan</td><td>800005</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_B</td><td>2026-05-03 08:33:43</td><td>10 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-03 08:34:02</td></tr><tr><td>Paresh</td><td>paresh</td><td>800018</td><td>agent</td><td><span class="badge b-red">NOTREADY</span></td><td>11KV_C</td><td>2026-05-03 08:33:51</td><td>2 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-03 08:34:02</td></tr><tr><td>PRAVAT RANJAN SAMAL</td><td>pravat</td><td>800010</td><td>agent</td><td><span class="badge b-red">NOTREADY</span></td><td>11KV_A</td><td>2026-05-03 08:33:51</td><td>2 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-03 08:34:02</td></tr><tr><td>Pravati Mishra</td><td>prabhati</td><td>800004</td><td>agent</td><td><span class="badge b-blue">READY</span></td><td>11KV_A</td><td>2026-05-03 08:31:01</td><td>2 minutes, 52 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-03 08:34:02</td></tr><tr><td>Sanjib Swain</td><td>sanjib1</td><td>800017</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_C</td><td>2026-05-03 08:33:36</td><td>17 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-03 08:34:02</td></tr><tr><td>Sibaprasad1</td><td>sibaprasad1</td><td>800020</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_C</td><td>2026-05-03 08:29:48</td><td>4 minutes, 5 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-03 08:34:02</td></tr><tr><td>sidharth das</td><td>sidharth12</td><td>800006</td><td>agent</td><td><span class="badge b-green">ONCALL</span></td><td>11KV_B</td><td>2026-05-03 08:28:49</td><td>5 minutes, 4 seconds</td><td>Click</td><td>Toggle Dropdown
+ Change Group</td><td>ClickClick2</td><td>2026-05-03 08:34:02</td></tr></tbody></table></div>
   </div>
 </div>
-<footer>TPCODL PSCC IVR Automation v7.4 | Full‑day charts | Agent performance last 30 min | Status history every 5 min</footer>
+
+<footer>TPCODL PSCC IVR Automation v8.0 | Agent performance last 30 min | Auto-refresh 5 min</footer>
+
 <script>
-function showTab(name){ 
+function showTab(name){
   document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
@@ -237,69 +372,150 @@ function showTab(name){
 Chart.defaults.font.family="'Segoe UI',Arial,sans-serif";
 Chart.defaults.font.size=11;
 Chart.defaults.plugins.legend.position='bottom';
-const hLabels = ["00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"];
-const hTotal  = [39, 12, 9, 6, 8, 9, 7, 8, 3, 12, 13, 19, 21, 38, 40, 50, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-const hAns    = [36, 12, 9, 6, 8, 9, 6, 8, 3, 12, 9, 14, 13, 16, 21, 28, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-const hAbn    = [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 5, 3, 3, 6, 9, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-const agtLabels = ["Monaranjan Nayak", "sidharth das", "Sanjib Swain", "Paresh", "Deepak Kumar Biswal", "Pravati Mishra", "Maneesha Samantray", "PRAVAT RANJAN SAMAL", "Sibaprasad1"];
-const agtAns    = [10, 5, 5, 5, 2, 2, 1, 1, 1];
-const agtAbn    = [1, 5, 0, 0, 2, 0, 0, 0, 0];
-const agtRates  = [83.3, 50.0, 100.0, 100.0, 50.0, 100.0, 50.0, 100.0, 100.0];
-const grpLabels = ["11KV_A", "11KV_B", "11KV_C"];
-const grpAns    = [65, 74, 83];
-const grpAbn    = [13, 20, 2];
-const durLabels = ["0\u201330s", "31\u201360s", "61\u2013120s", "2\u20135 min", "5 min+"];
-const durVals   = [33, 54, 92, 106, 33];
-const totalAns = 222;
-const totalAbn = 35;
+
+const hLabels     = ["00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"];
+const hTotal      = [39, 12, 9, 6, 8, 9, 7, 8, 3, 12, 13, 19, 21, 38, 40, 50, 68, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const hAns        = [36, 12, 9, 6, 8, 9, 6, 8, 3, 12, 9, 14, 13, 16, 21, 28, 36, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const hAbn        = [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 5, 3, 3, 6, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const hLiveAgents = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const agtLabels   = ["sidharth das", "Sanjib Swain", "Monaranjan Nayak", "Maneesha Samantray", "Deepak Kumar Biswal", "Sibaprasad1", "Paresh", "Pravati Mishra", "PRAVAT RANJAN SAMAL"];
+const agtAns      = [9, 8, 4, 4, 3, 3, 2, 2, 1];
+const agtAbn      = [0, 1, 3, 2, 1, 0, 0, 0, 0];
+const agtRates    = [100.0, 88.9, 57.1, 66.7, 75.0, 100.0, 100.0, 100.0, 100.0];
+const grpLabels   = ["11KV_A", "11KV_B", "11KV_C"];
+const grpAns      = [73, 84, 93];
+const grpAbn      = [15, 23, 3];
+const durLabels   = ["0\u201330s", "31\u201360s", "61\u2013120s", "2\u20135 min", "5 min+"];
+const durVals     = [29, 63, 101, 132, 41];
+const totalAns    = 250;
+const totalAbn    = 41;
 const agentsExist = (agtLabels.length > 0);
+
 const C = {
-  blue: 'rgba(21,101,192,0.85)', blueL: 'rgba(21,101,192,0.15)',
-  green: 'rgba(46,125,50,0.85)', greenL: 'rgba(46,125,50,0.15)',
-  red: 'rgba(198,40,40,0.85)', redL: 'rgba(198,40,40,0.15)',
-  multi: ['#1565c0','#2e7d32','#c62828','#e65100','#00695c','#6a1b9a','#283593','#00818f']
+  blue:'rgba(21,101,192,0.85)', blueL:'rgba(21,101,192,0.15)',
+  green:'rgba(46,125,50,0.85)', greenL:'rgba(46,125,50,0.15)',
+  red:'rgba(198,40,40,0.85)',   redL:'rgba(198,40,40,0.15)',
+  orange:'rgba(230,81,0,0.85)',
+  purple:'rgba(106,27,154,0.85)',
+  multi:['#1565c0','#2e7d32','#c62828','#e65100','#00695c','#6a1b9a','#283593','#00818f']
 };
-// Half-hourly chart (full day)
+
+// ── 1. Half-hourly Trend + Live Agent count (dual axis) ─────────
 new Chart(document.getElementById('chartHalfHour'), {
-  data: {
+  data:{
     labels: hLabels,
-    datasets: [
-      { type:'bar', label:'Total', data:hTotal, backgroundColor:C.blueL, borderColor:C.blue, borderWidth:1.5 },
-      { type:'line', label:'Answered', data:hAns, borderColor:C.green, backgroundColor:'transparent', pointBackgroundColor:C.green, pointRadius:3, tension:0.35 },
-      { type:'line', label:'Abandoned', data:hAbn, borderColor:C.red, backgroundColor:C.redL, fill:true, pointBackgroundColor:C.red, pointRadius:3, tension:0.35 }
+    datasets:[
+      { type:'bar',  label:'Total Calls', data:hTotal,
+         backgroundColor:C.blueL, borderColor:C.blue, borderWidth:1.5, yAxisID:'y' },
+      { type:'line', label:'Answered',    data:hAns,
+         borderColor:C.green, backgroundColor:'transparent',
+         pointBackgroundColor:C.green, pointRadius:2, tension:0.3, yAxisID:'y' },
+      { type:'line', label:'Abandoned',   data:hAbn,
+         borderColor:C.red, backgroundColor:C.redL, fill:true,
+         pointBackgroundColor:C.red, pointRadius:2, tension:0.3, yAxisID:'y' },
+      { type:'line', label:'Live Agents', data:hLiveAgents,
+         borderColor:C.orange, backgroundColor:'transparent',
+         pointBackgroundColor:C.orange, pointRadius:3,
+         borderWidth:2, borderDash:[5,3], tension:0.2, yAxisID:'y2' },
     ]
   },
-  options: { responsive:true, scales: { y: { beginAtZero:true, ticks: { callback: v => Number.isInteger(v) ? v : null } } } }
+  options:{
+    responsive:true,
+    interaction:{mode:'index',intersect:false},
+    scales:{
+      x:{ grid:{display:false},
+           ticks:{maxRotation:45,
+                   callback:function(val,i){ return i%2===0?this.getLabelForValue(val):''; }
+           }
+      },
+      y:{ beginAtZero:true, position:'left',
+           title:{display:true,text:'Calls',font:{size:10}},
+           grid:{color:'#f0f0f0'},
+           ticks:{callback:v=>Number.isInteger(v)?v:null} },
+      y2:{ beginAtZero:true, position:'right',
+            title:{display:true,text:'Live Agents',font:{size:10}},
+            grid:{display:false},
+            ticks:{callback:v=>Number.isInteger(v)?v:null,stepSize:1},
+            max: Math.max(...hLiveAgents, 10) + 2 }
+    },
+    plugins:{
+      tooltip:{
+        callbacks:{
+          afterBody(items){
+            const i=items[0].dataIndex;
+            const t=hTotal[i];
+            return t?[`Answer Rate: ${t?((hAns[i]/t)*100).toFixed(1):0}%`]:[];
+          }
+        }
+      }
+    }
+  }
 });
-// Donut (full day)
-new Chart(document.getElementById('chartDonut'), {
+
+// ── 2. Donut ─────────────────────────────────────────────────────
+new Chart(document.getElementById('chartDonut'),{
   type:'doughnut',
-  data: { labels:['Answered','Abandoned'], datasets:[{ data:[totalAns,totalAbn], backgroundColor:[C.green,C.red], borderWidth:2 }] },
-  options: { cutout:'65%', plugins: { tooltip: { callbacks: { label: function(context) { const tot = context.dataset.data.reduce((a,b)=>a+b,0); const pct = tot ? ((context.parsed/tot)*100).toFixed(1) : 0; return context.label + ': ' + context.parsed.toLocaleString() + ' (' + pct + '%)'; } } } } }
+  data:{labels:['Answered','Abandoned'],
+         datasets:[{data:[totalAns,totalAbn],
+           backgroundColor:[C.green,C.red],borderWidth:2,hoverOffset:10}]},
+  options:{cutout:'65%',plugins:{tooltip:{callbacks:{
+    label(ctx){
+      const tot=ctx.dataset.data.reduce((a,b)=>a+b,0);
+      const pct=tot?((ctx.parsed/tot)*100).toFixed(1):0;
+      return ` ${ctx.label}: ${ctx.parsed.toLocaleString()} (${pct}%)`;
+    }
+  }}}}
 });
-// Agent charts (only in Agent Performance tab, not in Charts tab)
-if (agentsExist) {
-  new Chart(document.getElementById('chartAgentAns'), { type:'bar', data:{ labels:agtLabels, datasets:[{ label:'Answered', data:agtAns, backgroundColor:C.green, borderRadius:4 }] }, options:{ indexAxis:'y', responsive:true, plugins:{ legend:{ display:false } }, scales:{ x:{ beginAtZero:true, ticks:{ callback:v=>Number.isInteger(v)?v:null } } } } });
-  new Chart(document.getElementById('chartAgentAbn'), { type:'bar', data:{ labels:agtLabels, datasets:[{ label:'Abandoned', data:agtAbn, backgroundColor:C.red, borderRadius:4 }] }, options:{ indexAxis:'y', responsive:true, plugins:{ legend:{ display:false } }, scales:{ x:{ beginAtZero:true, ticks:{ callback:v=>Number.isInteger(v)?v:null } } } } });
-  new Chart(document.getElementById('chartAgentRate'), { type:'radar', data:{ labels:agtLabels, datasets:[{ label:'Answer Rate %', data:agtRates, backgroundColor:'rgba(21,101,192,0.15)', borderColor:C.blue, pointBackgroundColor:C.blue, pointRadius:4, borderWidth:2 }] }, options:{ scales:{ r:{ min:0, max:100, ticks:{ stepSize:20 } } } } });
-} else {
-  document.getElementById('chartAgentAns').style.display = 'none';
-  document.getElementById('chartAgentAbn').style.display = 'none';
-  document.getElementById('chartAgentRate').style.display = 'none';
-  const msg = document.createElement('div'); msg.className = 'no-data'; msg.innerText = 'No agent calls in the last ' + 30 + ' minutes.'; document.querySelector('#tab-agentperf .chart-grid').appendChild(msg);
+
+// ── 3. Group stacked bar ─────────────────────────────────────────
+new Chart(document.getElementById('chartGroup'),{
+  type:'bar',
+  data:{labels:grpLabels.length?grpLabels:['No Data'],
+    datasets:[
+      {label:'Answered',data:grpAns.length?grpAns:[0],backgroundColor:C.green,borderRadius:4,stack:'g'},
+      {label:'Abandoned',data:grpAbn.length?grpAbn:[0],backgroundColor:C.red,borderRadius:4,stack:'g'}
+    ]},
+  options:{scales:{
+    x:{stacked:true,grid:{display:false}},
+    y:{stacked:true,beginAtZero:true,ticks:{callback:v=>Number.isInteger(v)?v:null}}
+  }}
+});
+
+// ── 4. Duration ───────────────────────────────────────────────────
+new Chart(document.getElementById('chartDur'),{
+  type:'bar',
+  data:{labels:durLabels.length?durLabels:['No Data'],
+    datasets:[{label:'Calls',data:durVals.length?durVals:[0],
+      backgroundColor:C.multi,borderRadius:5}]},
+  options:{plugins:{legend:{display:false}},
+    scales:{y:{beginAtZero:true,ticks:{callback:v=>Number.isInteger(v)?v:null}}}}
+});
+
+// ── 5 & 6. Agent charts (in Agent Performance tab) ───────────────
+if(agentsExist){
+  new Chart(document.getElementById('chartAgentAns'),{
+    type:'bar',data:{labels:agtLabels,
+      datasets:[{label:'Answered',data:agtAns,backgroundColor:C.green,borderRadius:4}]},
+    options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},
+      scales:{x:{beginAtZero:true,ticks:{callback:v=>Number.isInteger(v)?v:null}},
+               y:{grid:{display:false}}}}
+  });
+  new Chart(document.getElementById('chartAgentAbn'),{
+    type:'bar',data:{labels:agtLabels,
+      datasets:[{label:'Abandoned',data:agtAbn,backgroundColor:C.red,borderRadius:4}]},
+    options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},
+      scales:{x:{beginAtZero:true,ticks:{callback:v=>Number.isInteger(v)?v:null}},
+               y:{grid:{display:false}}}}
+  });
+  new Chart(document.getElementById('chartAgentRate'),{
+    type:'radar',
+    data:{labels:agtLabels,datasets:[{label:'Answer Rate %',data:agtRates,
+      backgroundColor:'rgba(21,101,192,0.15)',borderColor:C.blue,
+      pointBackgroundColor:C.blue,pointRadius:4,borderWidth:2}]},
+    options:{scales:{r:{min:0,max:100,ticks:{stepSize:20},
+      grid:{color:'#e0e0e0'},pointLabels:{font:{size:10}}}}}
+  });
 }
-// Group chart (full day)
-new Chart(document.getElementById('chartGroup'), {
-  type:'bar',
-  data:{ labels: grpLabels.length ? grpLabels : ['No Data'], datasets:[ { label:'Answered', data:grpAns.length?grpAns:[0], backgroundColor:C.green, borderRadius:4, stack:'g' }, { label:'Abandoned', data:grpAbn.length?grpAbn:[0], backgroundColor:C.red, borderRadius:4, stack:'g' } ] },
-  options:{ scales:{ x:{ stacked:true }, y:{ stacked:true, beginAtZero:true, ticks:{ callback:v=>Number.isInteger(v)?v:null } } } }
-});
-// Duration chart (full day)
-new Chart(document.getElementById('chartDur'), {
-  type:'bar',
-  data:{ labels: durLabels.length ? durLabels : ['No Data'], datasets:[{ label:'Calls', data:durVals.length?durVals:[0], backgroundColor:C.multi, borderRadius:5 }] },
-  options:{ plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:true, ticks:{ callback:v=>Number.isInteger(v)?v:null } } } }
-});
 </script>
 </body>
 </html>
